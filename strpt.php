@@ -136,7 +136,7 @@ if (isset($_POST['submitStudent'])) {
                             <p>Project Score</p>
                         </div>
                         <div class="score_card">
-                            <div class="pie animate no-round" style="--p: <?=$row["project_score"]?>;--c:#F79600;">  <?=$row["attendence"]?>%</div>
+                            <div class="pie animate no-round" style="--p: <?=$row["project_score"]?>;--c:#F79600;">  <?=$row["project_score"]?>%</div>
                         
                         </div>
                     </div>
@@ -145,7 +145,7 @@ if (isset($_POST['submitStudent'])) {
                             <p> Average QUiz Score</p>
                         </div>
                         <div class="score_card">
-                            <div class="pie animate no-round" style="--p: <?=$row["quiz_score"]?>;--c:#F79600;">  <?=$row["retention"]?>%</div>
+                            <div class="pie animate no-round" style="--p: <?=$row["quiz_score"]?>;--c:#F79600;">  <?=$row["quiz_score"]?>%</div>
                         
                         </div>
                     </div>
@@ -154,7 +154,7 @@ if (isset($_POST['submitStudent'])) {
                             <p>Attendance</p>
                         </div>
                         <div class="score_card">
-                            <div class="pie animate no-round" style="--p: <?=$row["attendance"]?>;--c:#F79600;">  <?=$row["creativity"]?>%</div>
+                            <div class="pie animate no-round" style="--p: <?=$row["attendence"]?>;--c:#F79600;">  <?=$row["attendence"]?>%</div>
                         
                         </div>
                     </div>
