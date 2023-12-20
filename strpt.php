@@ -92,7 +92,7 @@ if (isset($_POST['submitStudent'])) {
                         <section class="student_details" id="student-details">
                             <!-- Include student details here -->
                             <div class="profile-card">
-                                <img src='imgs/<?= $row["picture"] ?>'>
+                                <img src='imgs/Logos/<?= $row["picture"] ?>'>
                                 <h2><?= $row["student_name"] ?></h2>
                                 <p>Class: <?= $row["std_level"] ?></p>
                                 <p>Project Title: <?= $row["student_desc"] ?></p>
