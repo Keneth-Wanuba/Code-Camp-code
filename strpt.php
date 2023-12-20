@@ -82,7 +82,7 @@ if (isset($_POST['submitStudent'])) {
 
                <?php
                 // Fetch details
-                $fetchDetails = "SELECT * FROM product WHERE student_id = ?";
+                $fetchDetails = "SELECT * FROM students WHERE student_id = ?";
                 $result1 = executePreparedStatement($conn, $fetchDetails, [$escaped_student], "s");
 
                 if ($result1->num_rows > 0) {
@@ -105,7 +105,7 @@ if (isset($_POST['submitStudent'])) {
                 ?>
                 <?php
                     // Fetch marks
-                    $fetchMarks = "SELECT * FROM orders WHERE student_id = ?";
+                    $fetchMarks = "SELECT * FROM assessment WHERE student_id = ?";
                     $result2 = executePreparedStatement($conn, $fetchMarks, [$escaped_student], "s");
 
                     if ($result2->num_rows > 0) {
@@ -121,98 +121,44 @@ if (isset($_POST['submitStudent'])) {
                         </section>
             </div>
 
-            <section id="quiz-project">
-                        <!-- Quiz and project assessment here -->
-                        <div class="cont">
-                            <div class="score_desc">
-                                <p style="padding:10px;"> Quiz Average</p>
-                            </div>
-                            <div class="score_card">
-                                <div class="pie animate no-round" style="--p:<?= $row["quiz_score"] ?>;--c:#F79600;"><?= $row["quiz_score"] ?>%</div>
-                            </div>
-                        </div>
-                        <div class="cont">
-                            <div class="score_desc">
-                                <p>Final Project</p>
-                            </div>
-                            <div class="score_card">
-                                <div class="pie animate no-round" style="--p: <?= $row["project_score"] ?>;--c:#F79600;"><?= $row["project_score"] ?>%</div>
-                            </div>
-                        </div>
-            </section>
-
+           
 
             <section id="class-assessment">
                  <!-- Include class assessment here -->
              <h2 style=" background:  #0046B6;
     color: #F79600;
-    padding: 18px; margin-bottom:5%; margin-top:3%;  margin-left:0;  margin-right:0">Quiz Assessment</h2>
+    padding: 18px; margin-bottom:5%; margin-top:3%;  margin-left:0;  margin-right:0">Student Assessment</h2>
                <!-- Add your content here -->
              <div class="crad">
              <div class="marks">
                     <div class="cont_ass">
                         <div class="score_desc">
-                            <p>Loops</p>
+                            <p>Project Score</p>
                         </div>
                         <div class="score_card">
-                            <div class="pie animate no-round" style="--p: <?=$row["attendence"]?>;--c:#F79600;">  <?=$row["attendence"]?>%</div>
+                            <div class="pie animate no-round" style="--p: <?=$row["project_score"]?>;--c:#F79600;">  <?=$row["attendence"]?>%</div>
                         
                         </div>
                     </div>
                     <div class="cont_ass">
                         <div class="score_desc">
-                            <p> Variables</p>
+                            <p> Average QUiz Score</p>
                         </div>
                         <div class="score_card">
-                            <div class="pie animate no-round" style="--p: <?=$row["retention"]?>;--c:#F79600;">  <?=$row["retention"]?>%</div>
+                            <div class="pie animate no-round" style="--p: <?=$row["quiz_score"]?>;--c:#F79600;">  <?=$row["retention"]?>%</div>
                         
                         </div>
                     </div>
                     <div class="cont_ass">
                         <div class="score_desc">
-                            <p>Arithmetic Operators</p>
+                            <p>Attendance</p>
                         </div>
                         <div class="score_card">
-                            <div class="pie animate no-round" style="--p: <?=$row["creativity"]?>;--c:#F79600;">  <?=$row["creativity"]?>%</div>
+                            <div class="pie animate no-round" style="--p: <?=$row["attendance"]?>;--c:#F79600;">  <?=$row["creativity"]?>%</div>
                         
                         </div>
                     </div>
-                    <!-- <div class="cont_ass">
-                        <div class="score_desc">
-                            <p>Application of knowledge</p>
-                        </div>
-                        <div class="score_card">
-                            <div class="pie animate no-round" style="--p: <?=$row["applicability"]?>;--c:#F79600;">  <?=$row["applicability"]?>%</div>
-                        
-                        </div>
-                    </div> -->
-                            <div class="cont_ass">
-                            <div class="score_desc">
-                                <p>Scenes</p>
-                            </div>
-                            <div class="score_card">
-                                <div class="pie animate no-round" style="--p: <?=$row["concentration"]?>;--c:#F79600;">  <?=$row["concentration"]?>%</div>
-                            
-                            </div>
-                    </div>
-                    <div class="cont_ass">
-                        <div class="score_desc">
-                            <p>Cordinates</p>
-                        </div>
-                        <div class="score_card">
-                            <div class="pie animate no-round" style="--p: <?=$row["Interest"]?>;--c:#F79600;">  <?=$row["Interest"]?>%</div>
-                          
-                        </div>
-                    </div>
-                    <div class="cont_ass">
-                        <div class="score_desc">
-                            <p>Class Quiz</p>
-                        </div>
-                        <div class="score_card">
-                            <div class="pie animate no-round" style="--p: <?=$row["Speed"]?>;--c:#F79600;">  <?=$row["Speed"]?>%</div>
-                          
-                        </div>
-                    </div>
+ 
             </div>
     
              </div>
@@ -227,10 +173,7 @@ if (isset($_POST['submitStudent'])) {
 }
                 ?>
             </section>
-            <!-- <section>
-                <input type="submit" name="create" class="btn btn-success" value="Generate PDF">
-            </section> -->
-
+        
 </div>
 <br><br><br>
 
@@ -238,22 +181,4 @@ if (isset($_POST['submitStudent'])) {
         &copy; 2023 Code Academy Uganda
     </footer>
 </body>
-<!-- <script>
-    function downloadPDF() {
-        $.ajax({
-            type: 'POST',
-            url: 'student_report.php',
-            success: function(data) {
-                // Create a Blob from the PDF data
-                var blob = new Blob([data], { type: 'application/pdf' });
-
-                // Create a link element and trigger a click to download the PDF
-                var link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                link.download = 'student_report.pdf';
-                link.click();
-            }
-        });
-    }
-</script> -->
 </html>
