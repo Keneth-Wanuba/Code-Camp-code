@@ -125,9 +125,7 @@ if (isset($_POST['submitStudent'])) {
 
             <section id="class-assessment">
                  <!-- Include class assessment here -->
-             <h2 style=" background:  #0046B6;
-    color: #F79600;
-    padding: 18px; margin-bottom:5%; margin-top:3%;  margin-left:0;  margin-right:0">Student Assessment</h2>
+             <h2 style=" background:  #0046B6; color: #F79600; padding: 18px; margin-bottom:5%; margin-top:3%;  margin-left:0;  margin-right:0">Student Assessment</h2>
                <!-- Add your content here -->
              <div class="crad">
              <div class="marks">
@@ -162,10 +160,37 @@ if (isset($_POST['submitStudent'])) {
             </div>
     
              </div>
+             <h2 style=" background:  #0046B6; color: #F79600; padding: 18px; margin-bottom:5%; margin-top:3%;  margin-left:0;  margin-right:0">
+             Next Class: 
+             <?php
+                if(!($row["attendence"]>69) or !($row["project_score"]>69) or !($row["project_score"]>69) ){
+                    echo "Repeat Current Class";
+                }else{
+                    $fetchDetails = "SELECT std_level FROM students WHERE student_id = ?";
+                    $result1 = executePreparedStatement($conn, $fetchDetails, [$escaped_student], "s");
+                    if ($result1->num_rows > 0) {
+                        while ($row = $result1->fetch_assoc()) {
+                            if ($row["std_level"] == 'Scratch Beginners'){
+                                echo "Scratch Intermediate";
+                            }elseif($row["std_level"] == 'Scratch Intermediate'){
+                                echo "Scratch Advanced";
+                            }elseif($row["std_level"] == 'Scratch Advanced'){
+                                echo "2D Game Development";
+                            }elseif($row["std_level"] == '2D Game Development'){
+                                echo "Advanced 2D Game Development";
+                            }else{
+                                echo "Confirm With MGT";
+                            }
+                        }
+                    }
+             ?>
+            </h2>
+
                         <?php
                     }
-                } else {
-                    echo "No quiz and project assessment data found for the student";
+                } 
+                // else {
+                //     echo "No quiz and project assessment data found for the student";
                 }
                 
     // Close the connection
