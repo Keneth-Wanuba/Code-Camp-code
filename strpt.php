@@ -95,7 +95,7 @@ if (isset($_POST['submitStudent'])) {
                                 <img src='imgs/<?= $row["picture"] ?>'>
                                 <h2><?= $row["student_name"] ?></h2>
                                 <p>Class: <?= $row["std_level"] ?></p>
-                                <p><?= $row["student_desc"] ?></p>
+                                <p>Project Title: <?= $row["student_desc"] ?></p>
                             </div>
                             <?php
                     }
