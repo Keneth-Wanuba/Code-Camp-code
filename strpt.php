@@ -106,24 +106,35 @@ if (isset($_POST['submitStudent'])) {
                 }
                 ?>
                 <?php
-                    // Fetch marks
-                    $fetchMarks = "SELECT * FROM assessment WHERE student_id = ?";
+                    // Fetch project
+                    $fetchMarks = "SELECT * FROM stdprojects WHERE student_id = ? AND CodeCampCode = 'CC050'";
                     $result2 = executePreparedStatement($conn, $fetchMarks, [$escaped_student], "s");
 
                     if ($result2->num_rows > 0) {
                         while ($row = $result2->fetch_assoc()) {
-                            // Display student marks here
+                            // Display project here
                         ?>
 
                             <div class="std_project">
-                <iframe src="<?= $row["scratch_project"] ?>/embed" allowtransparency="true" width="380" height="402"  frameborder="0" scrolling="no" allowfullscreen></iframe>        </div>
+                <iframe src="<?= $row["ProjectLink"] ?>/embed" allowtransparency="true" width="380" height="402"  frameborder="0" scrolling="no" allowfullscreen></iframe>        </div>
                </div>
 
 
                         </section>
             </div>
+            <?php
+                        }
+                    }
 
-           
+            // Fetch marks
+                    $fetchMarks = "SELECT * FROM stdprojects WHERE student_id = ? AND CodeCampCode = 'CC050'";
+                    $result2 = executePreparedStatement($conn, $fetchMarks, [$escaped_student], "s");
+
+                    if ($result2->num_rows > 0) {
+                        while ($row = $result2->fetch_assoc()) {
+                            // Display student marks here
+
+                            
 
             <section id="class-assessment">
                  <!-- Include class assessment here -->
