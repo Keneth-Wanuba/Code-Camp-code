@@ -1,9 +1,9 @@
 <?php
 
 $server = "localhost";
-$user = "u622340404_code_camp";
-$password = "CodeCamp@2023";
-$db = "u622340404_code_camp_db";
+$user = "root";
+$password = "";
+$db = "codecamp";
 
 $conn = mysqli_connect($server,$user,$password,$db);
 
