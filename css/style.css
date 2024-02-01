@@ -283,6 +283,14 @@ section {
 .cont p{
   color: #ff9800;
 }
+
+.codecampNo{
+  font-size: 1rem;
+  text-align: left;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
 .crad{
   background-color: #fff;
   border: #c9bdbd 1px solid;

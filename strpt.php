@@ -83,7 +83,7 @@ if (isset($_POST['submitStudent'])) {
                <div class="card">
 
                <?php
-                // Fetch details
+                // Fetch student details
                 $fetchDetails = "SELECT * FROM students WHERE student_id = ?";
                 $result1 = executePreparedStatement($conn, $fetchDetails, [$escaped_student], "s");
 
@@ -97,21 +97,32 @@ if (isset($_POST['submitStudent'])) {
                                 <img src='imgs/Logos/<?= $row["picture"] ?>'>
                                 <h2><?= $row["student_name"] ?></h2>
                                 <p>CLASS: <?= $row["std_level"] ?></p>
-                                <p>PROJECT TITLE: <?= $row["student_desc"] ?></p>
+                                <?php
+                                   }
+                                } else {
+                                    echo "No such student found in Database. Check student code and Try again";
+                                }
+                                        
+                                $project = "SELECT * FROM stdprojects WHERE CodeCampCode = 'CC050' AND student_id = ?";
+                $result3 = executePreparedStatement($conn, $project, [$escaped_student], "s");
+
+                if ($result3->num_rows > 0) {
+                    while ($row3 = $result3->fetch_assoc()) {
+                        ?>
+                                <p>PROJECT TITLE: <?= $row3["ProjectTitle"] ?></p>
                             </div>
                             <?php
                     }
                 } else {
-                    echo "Check student code and generate report again";
+                    echo "No Project Found";
                 }
-                ?>
-                <?php
+         
                     // Fetch project
-                    $fetchMarks = "SELECT * FROM stdprojects WHERE student_id = ? AND CodeCampCode = 'CC050'";
-                    $result2 = executePreparedStatement($conn, $fetchMarks, [$escaped_student], "s");
+                    $fetchpjlink = "SELECT * FROM stdprojects WHERE student_id = ? AND CodeCampCode = 'CC050'";
+                    $result5 = executePreparedStatement($conn, $fetchpjlink, [$escaped_student], "s");
 
-                    if ($result2->num_rows > 0) {
-                        while ($row = $result2->fetch_assoc()) {
+                    if ($result5->num_rows > 0) {
+                        while ($row = $result5->fetch_assoc()) {
                             // Display project here
                         ?>
 
@@ -125,22 +136,26 @@ if (isset($_POST['submitStudent'])) {
             <?php
                         }
                     }
+                }
 
             // Fetch marks
-                    $fetchMarks = "SELECT * FROM stdprojects WHERE student_id = ? AND CodeCampCode = 'CC050'";
+                    $fetchMarks = "SELECT * FROM assessment WHERE student_id = ?";
                     $result2 = executePreparedStatement($conn, $fetchMarks, [$escaped_student], "s");
 
                     if ($result2->num_rows > 0) {
                         while ($row = $result2->fetch_assoc()) {
                             // Display student marks here
 
-                            
+                   ?>         
 
             <section id="class-assessment">
                  <!-- Include class assessment here -->
              <h2 style=" background:  #0046B6; color: #F79600; padding: 18px; margin-bottom:5%; margin-top:3%;  margin-left:0;  margin-right:0">Student Assessment</h2>
                <!-- Add your content here -->
+               <h class="codecampNo">49th Code Camp</h>
+
              <div class="crad">
+
              <div class="marks">
                     <div class="cont_ass">
                         <div class="score_desc">
@@ -173,23 +188,74 @@ if (isset($_POST['submitStudent'])) {
             </div>
     
              </div>
+<?php
+                        }
+             // 50th camp
+                    $fetchNewMarks = "SELECT * FROM 50thCCMarks WHERE student_id = ?";
+                    $marks = executePreparedStatement($conn, $fetchNewMarks, [$escaped_student], "s");
+
+                    if ($marks->num_rows > 0) {
+                        while ($row3 = $marks->fetch_assoc()) {
+                            // Display student marks here
+
+                   ?>         
+
+            <section id="class-assessment">
+                 <!-- Include class assessment here -->
+               <h class="codecampNo">50th Code Camp</h>
+
+             <div class="crad">
+
+             <div class="marks">
+                    <div class="cont_ass">
+                        <div class="score_desc">
+                            <p>Project Score</p>
+                        </div>
+                        <div class="score_card">
+                            <div class="pie animate no-round" style="--p: <?=$row3["Project_Marks"]?>;--c:#F79600;">  <?=$row3["Project_Marks"]?>%</div>
+                        
+                        </div>
+                    </div>
+                    <div class="cont_ass">
+                        <div class="score_desc">
+                            <p> Average Quiz Score</p>
+                        </div>
+                        <div class="score_card">
+                            <div class="pie animate no-round" style="--p: <?=$row3["Quiz"]?>;--c:#F79600;">  <?=$row3["Quiz"]?>%</div>
+                        
+                        </div>
+                    </div>
+                    <div class="cont_ass">
+                        <div class="score_desc">
+                            <p>Attendance</p>
+                        </div>
+                        <div class="score_card">
+                            <div class="pie animate no-round" style="--p: <?=$row3["Attendance"]?>;--c:#F79600;">  <?=$row3["Attendance"]?>%</div>
+                        
+                        </div>
+                    </div>
+ 
+            </div>
+    
+             </div>
+
              <h2 style=" background:  #0046B6; color: #F79600; padding: 18px; margin-bottom:5%; margin-top:3%;  margin-left:0;  margin-right:0">
              <!--Next Class: -->
              <?php
-                if(!($row["attendence"]>69) or !($row["project_score"]>69) or !($row["quiz_score"]>69) ){
+                if(!($row3["Attendance"]>69) or !($row3["Project_Marks"]>69) or !($row3["Quiz"]>69) ){
                      $fetchClass = "SELECT std_level FROM students WHERE student_id = ?";
                     $result2 = executePreparedStatement($conn, $fetchClass, [$escaped_student], "s");
                     if ($result2->num_rows > 0) {
                         while ($row = $result2->fetch_assoc()){
-                    echo $row["std_level"];
-                        }
-                    }else{
-                            echo "no class";
-                         }                }else{
-                    $fetchDetails = "SELECT std_level FROM students WHERE student_id = ?";
-                    $result1 = executePreparedStatement($conn, $fetchDetails, [$escaped_student], "s");
-                    if ($result1->num_rows > 0) {
-                        while ($row = $result1->fetch_assoc()) {
+                    // echo $row["std_level"];
+                    //     }
+                    // }else{
+                    //         echo "no class";
+                    //      }                }else{
+                    // $fetchDetails = "SELECT std_level FROM students WHERE student_id = ?";
+                    // $result1 = executePreparedStatement($conn, $fetchDetails, [$escaped_student], "s");
+                    // if ($result1->num_rows > 0) {
+                        // while ($row = $result1->fetch_assoc()) {
                             if ($row["std_level"] == 'SCRATCH BEGINNERS'){
                                 echo "Scratch Intermediate";
                             }elseif($row["std_level"] == 'SCRATCH INTERMEDIATE'){
@@ -197,7 +263,7 @@ if (isset($_POST['submitStudent'])) {
                             }elseif($row["std_level"] == 'SCRATCH ADVANCED'){
                                 echo "2D Game Development";
                             }elseif($row["std_level"] == '2D GAME DEVELOPMENT'){
-                                echo "Advanced 2D Game Development";
+                                echo " STORY TELLING AND ANIMATION ";
                             }else{
                                 echo "Confirm With MGT";
                             }
