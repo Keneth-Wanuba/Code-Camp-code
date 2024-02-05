@@ -381,6 +381,21 @@ section {
     from{--p:0}
   }
 
+.btn_secondary{
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: white;
+  border: 1px solid white;
+  padding: 5px;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.btn_secondary:hover{
+  text-decoration: none;
+  color: orange;
+  border: 1px solid orange;
+}
 
 
 /* home page styles */

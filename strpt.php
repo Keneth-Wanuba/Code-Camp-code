@@ -256,7 +256,7 @@ if (isset($_POST['submitStudent'])) {
                                 echo "2D Game Development";
                                 echo "<br>";
                                 ?>
-                                        <a class="btn-secondary" href="certificate.php?student_name=<?php echo $studentName ?>">Certificate</a>
+                                        <a class="btn_secondary" href="certificate.php?student_name=<?php echo $studentName ?>">Generate Certificate</a>
                                 <?php   
                             }elseif($row6["std_level"] == '2D GAME DEVELOPMENT'){
                                 echo " STORY TELLING AND ANIMATION ";
