@@ -136,7 +136,7 @@ if (isset($_POST['submitStudent'])) {
             <?php
                         }
                     }
-                }
+                // }
 
             // Fetch marks
                     $fetchMarks = "SELECT * FROM assessment WHERE student_id = ?";
@@ -242,27 +242,23 @@ if (isset($_POST['submitStudent'])) {
              <h2 style=" background:  #0046B6; color: #F79600; padding: 18px; margin-bottom:5%; margin-top:3%;  margin-left:0;  margin-right:0">
              <!--Next Class: -->
              <?php
-                if(!($row3["Attendance"]>69) or !($row3["Project_Marks"]>69) or !($row3["Quiz"]>69) ){
-                     $fetchClass = "SELECT std_level FROM students WHERE student_id = ?";
-                    $result2 = executePreparedStatement($conn, $fetchClass, [$escaped_student], "s");
-                    if ($result2->num_rows > 0) {
-                        while ($row = $result2->fetch_assoc()){
-                    // echo $row["std_level"];
-                    //     }
-                    // }else{
-                    //         echo "no class";
-                    //      }                }else{
-                    // $fetchDetails = "SELECT std_level FROM students WHERE student_id = ?";
-                    // $result1 = executePreparedStatement($conn, $fetchDetails, [$escaped_student], "s");
-                    // if ($result1->num_rows > 0) {
-                        // while ($row = $result1->fetch_assoc()) {
-                            if ($row["std_level"] == 'SCRATCH BEGINNERS'){
+                if(($row3["Attendance"]>69) or ($row3["Project_Marks"]>69) or ($row3["Quiz"]>69) ){
+                     $fetchClass = "SELECT * FROM students WHERE student_id = ?";
+                    $result1= executePreparedStatement($conn, $fetchClass, [$escaped_student], "s");
+                    if ($result1->num_rows > 0) {
+                        while ($row6 = $result1->fetch_assoc()){
+                            $studentName=$row6["student_name"];
+                          if ($row6["std_level"] == 'SCRATCH BEGINNERS'){
                                 echo "Scratch Intermediate";
-                            }elseif($row["std_level"] == 'SCRATCH INTERMEDIATE'){
+                            }elseif($row6["std_level"] == 'SCRATCH INTERMEDIATE'){
                                 echo "Scratch Advanced";
-                            }elseif($row["std_level"] == 'SCRATCH ADVANCED'){
+                            }elseif($row6["std_level"] == 'SCRATCH ADVANCED'){
                                 echo "2D Game Development";
-                            }elseif($row["std_level"] == '2D GAME DEVELOPMENT'){
+                                echo "<br>";
+                                ?>
+                                        <a class="btn-secondary" href="certificate.php?student_name=<?php echo $studentName ?>">Certificate</a>
+                                <?php   
+                            }elseif($row6["std_level"] == '2D GAME DEVELOPMENT'){
                                 echo " STORY TELLING AND ANIMATION ";
                             }else{
                                 echo "Confirm With MGT";
@@ -275,12 +271,11 @@ if (isset($_POST['submitStudent'])) {
                         <?php
                     }
                 } 
-                // else {
-                //     echo "No quiz and project assessment data found for the student";
-                }
+                      
                 
     // Close the connection
     $conn->close();
+}}
 }
                 ?>
             </section>
