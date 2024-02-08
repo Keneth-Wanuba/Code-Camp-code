@@ -224,16 +224,18 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-transform: capitalize;
 
 
     
 }
 
 .profile-card img {
-    /* width: 150px; */
-    height: 150px;
+    max-width: 250px;
+    max-height: 250px;
     /* border-radius: 50%; */
     margin-bottom: 20px;
+    align-self: center;
    
 }
 
@@ -441,13 +443,19 @@ footer {
   background-color: azure;
 }
  
-@media only screen and (max-width: 700px){
+@media only screen and (max-width: 800px){
     /* For tablets: */
 
   body{
     padding-left: 6%;
     padding-right: 6%;
   }
+
+  .logos img {
+    position: relative;
+    height: 120px;
+    width: 160px;
+}
   
   h{
     font-size: 10px;
@@ -461,14 +469,43 @@ footer {
 @media only screen and (max-width: 500px) {
 /* for phones */
 
-body{
-  padding-left: 3%;
-  padding-right: 3%;
-}
+  body{
+    padding-left: 3%;
+    padding-right: 3%;
+  }
 
-.std_project{
-  display: none;
-}
+  .std_project{
+    display: none;
+  }
+
+  .student_details{
+    display: block;
+  }
+
+  .logos{
+    display: block;
+  }
+
+  .logos img{
+    align-self: center;
+    border-bottom: 1px solid orange;
+    position: relative;
+    height: 152px;
+    width: 204px;
+
+  }
+
+  .title{
+    margin-top: 30px;
+
+  }
+
+  h.school{
+    text-wrap: nowrap;
+    text-transform: uppercase;
+    font-size: 3.5em;
+  }
+
 
 }
 
