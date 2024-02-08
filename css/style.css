@@ -195,8 +195,10 @@ section {
 }
 
 .student_details{
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+  /* flex-direction: row; */
   margin-top: 2%;
   margin-left: 0;
   margin-right: 0;
@@ -211,16 +213,17 @@ section {
 
 
 .profile-card {
-    width: 600px;
+    max-width: 600px;
+    width: 90%;
     border: 1px solid #F79600;
-    padding: 10px;
     text-align: center;
-    justify-self: left;
-    margin-right: 10%;
-    height: 25rem;
-    padding-top: 7%;
-    padding-bottom: 7%;
-
+    min-height: 25rem;
+    padding: 2%;
+    margin: 2%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
 
     
@@ -247,6 +250,7 @@ section {
 
 /* score card */
 #quiz-project{
+  max-width: 600px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -258,6 +262,13 @@ section {
   padding: 0;
   /* padding-left: 7%; 
   padding-right: 7%;  */
+}
+
+.std_project{
+  padding: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #class-assessment{
@@ -301,7 +312,8 @@ section {
 .marks{
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Creates three columns with equal width */
+  /* grid-template-columns: repeat(3, 1fr); Creates three columns with equal width */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 30px;
 }
 
@@ -429,9 +441,34 @@ footer {
   background-color: azure;
 }
  
-@media screen and (max-width: 600px)
-{
+@media only screen and (max-width: 700px){
+    /* For tablets: */
+
+  body{
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+  
   h{
     font-size: 10px;
   }
+
+  .student_details{
+    justify-content: start;
+  }
 }
+
+@media only screen and (max-width: 500px) {
+/* for phones */
+
+body{
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+.std_project{
+  display: none;
+}
+
+}
+

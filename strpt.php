@@ -284,7 +284,7 @@ if (isset($_POST['submitStudent'])) {
 <br><br><br>
 
     <footer>
-        &copy; 2023 Code Academy Uganda
+        &copy; 2024 Code Academy Uganda
     </footer>
 </body>
 </html>
